@@ -32,17 +32,23 @@ android {
 }
 
 dependencies {
-    val supportLibraryVersion = "28.0.0"
+    val appcompatVersion = "1.0.0"
+    val kodeinVersion = "6.0.1"
 
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
     // Support libs
-    implementation("com.android.support:appcompat-v7:$supportLibraryVersion")
-    implementation("com.android.support.constraint:constraint-layout:1.1.3")
+    implementation("androidx.appcompat:appcompat:$appcompatVersion")
+    implementation("androidx.constraintlayout:constraintlayout:1.1.3")
 
     // Kotlin
     implementation(kotlin("stdlib", rootProject.extra["kotlinVersion"] as String))
 
     // Logging
     implementation("com.github.ajalt:timberkt:1.5.1")
+
+    // DI
+    implementation("org.kodein.di:kodein-di-generic-jvm:$kodeinVersion")
+    implementation("org.kodein.di:kodein-di-framework-android-x:$kodeinVersion")
+
 }
