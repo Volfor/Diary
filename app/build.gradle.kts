@@ -33,15 +33,16 @@ android {
 }
 
 dependencies {
-    val appcompatVersion = "1.0.0"
-    val lifecycleVersion = "2.0.0"
+    val appcompatVersion = "1.1.0-alpha01"
     val kodeinVersion = "6.0.1"
+    val lifecycleVersion = "2.0.0"
+    val navigationVersion = "1.0.0-alpha08"
 
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
     // Support libs
     implementation("androidx.appcompat:appcompat:$appcompatVersion")
-    implementation("androidx.constraintlayout:constraintlayout:1.1.3")
+    implementation("androidx.constraintlayout:constraintlayout:2.0.0-alpha2")
 
     // Kotlin
     implementation(kotlin("stdlib", rootProject.extra["kotlinVersion"] as String))
@@ -55,4 +56,6 @@ dependencies {
 
     // Architecture components
     implementation("androidx.lifecycle:lifecycle-extensions:$lifecycleVersion")
+    implementation("android.arch.navigation:navigation-fragment-ktx:$navigationVersion")
+    implementation("android.arch.navigation:navigation-ui-ktx:$navigationVersion")
 }
