@@ -1,11 +1,9 @@
 package com.github.volfor.diary
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.github.volfor.diary.base.BaseBoundVmActivity
+import com.github.volfor.diary.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    }
-}
+class MainActivity : BaseBoundVmActivity<ActivityMainBinding, MainViewModel>(
+    R.layout.activity_main,
+    MainViewModel::class
+)

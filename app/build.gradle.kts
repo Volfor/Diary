@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("kotlin-android")
     id("kotlin-android-extensions")
+    id("kotlin-kapt")
 }
 
 android {
@@ -33,6 +34,7 @@ android {
 
 dependencies {
     val appcompatVersion = "1.0.0"
+    val lifecycleVersion = "2.0.0"
     val kodeinVersion = "6.0.1"
 
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
@@ -51,4 +53,6 @@ dependencies {
     implementation("org.kodein.di:kodein-di-generic-jvm:$kodeinVersion")
     implementation("org.kodein.di:kodein-di-framework-android-x:$kodeinVersion")
 
+    // Architecture components
+    implementation("androidx.lifecycle:lifecycle-extensions:$lifecycleVersion")
 }
