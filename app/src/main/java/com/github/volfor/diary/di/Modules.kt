@@ -1,6 +1,6 @@
 package com.github.volfor.diary.di
 
-import com.github.volfor.diary.MainViewModel
+import com.github.volfor.diary.screens.main.MainViewModel
 import org.kodein.di.Kodein
 import org.kodein.di.direct
 import org.kodein.di.generic.bind

@@ -2,14 +2,14 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MainActivity"
+    tools:context=".screens.main.MainActivity"
     >
 
     <data>
 
         <variable
             name="vm"
-            type="com.github.volfor.diary.MainViewModel"
+            type="com.github.volfor.diary.screens.main.MainViewModel"
             />
     </data>
 
@@ -39,18 +39,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_message"
-            />
-
-        <Button
-            android:id="@+id/btn_test2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:onClick="@{() -> vm.onDialog()}"
-            android:text="Dialog"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_test"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

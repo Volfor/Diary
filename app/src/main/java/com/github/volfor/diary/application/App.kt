@@ -1,7 +1,8 @@
-package com.github.volfor.diary
+package com.github.volfor.diary.application
 
 import android.app.Application
 import com.github.ajalt.timberkt.Timber
+import com.github.volfor.diary.BuildConfig
 import com.github.volfor.diary.di.viewModelsModule
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware

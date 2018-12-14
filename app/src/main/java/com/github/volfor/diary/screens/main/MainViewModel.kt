@@ -1,4 +1,4 @@
-package com.github.volfor.diary
+package com.github.volfor.diary.screens.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -17,5 +17,4 @@ class MainViewModel : ViewModel() {
     fun onClick() {
         _uiEvents.value = Event(MainActivity.Event.Toast("Message from vm"))
     }
-
 }
