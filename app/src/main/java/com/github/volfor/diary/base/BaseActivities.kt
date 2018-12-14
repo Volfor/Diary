@@ -56,5 +56,9 @@ abstract class BaseBoundVmActivity<out TBinding : ViewDataBinding, out TViewMode
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.setVariable(BR.vm, vm)
+        initObservers()
+    }
+
+    open fun initObservers() {
     }
 }
