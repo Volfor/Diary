@@ -44,18 +44,24 @@ dependencies {
     implementation("androidx.appcompat:appcompat:$appcompatVersion")
     implementation("androidx.constraintlayout:constraintlayout:2.0.0-alpha2")
 
+    // Architecture components
+    implementation("androidx.lifecycle:lifecycle-extensions:$lifecycleVersion")
+    implementation("android.arch.navigation:navigation-fragment-ktx:$navigationVersion")
+    implementation("android.arch.navigation:navigation-ui-ktx:$navigationVersion")
+
     // Kotlin
     implementation(kotlin("stdlib", rootProject.extra["kotlinVersion"] as String))
-
-    // Logging
-    implementation("com.github.ajalt:timberkt:1.5.1")
 
     // DI
     implementation("org.kodein.di:kodein-di-generic-jvm:$kodeinVersion")
     implementation("org.kodein.di:kodein-di-framework-android-x:$kodeinVersion")
 
-    // Architecture components
-    implementation("androidx.lifecycle:lifecycle-extensions:$lifecycleVersion")
-    implementation("android.arch.navigation:navigation-fragment-ktx:$navigationVersion")
-    implementation("android.arch.navigation:navigation-ui-ktx:$navigationVersion")
+    // Firebase
+    implementation("com.google.firebase:firebase-core:16.0.6")
+    implementation("com.firebaseui:firebase-ui-auth:4.2.1")
+
+    // Logging
+    implementation("com.github.ajalt:timberkt:1.5.1")
 }
+
+plugins.apply("com.google.gms.google-services")
