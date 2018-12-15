@@ -2,29 +2,21 @@ package com.github.volfor.diary.screens.login
 
 import android.app.Activity
 import android.content.Intent
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
-import com.github.volfor.diary.extensions.Event
+import com.github.volfor.diary.base.BaseViewModel
 import com.github.volfor.diary.screens.login.LoginActivity.Event.Home
 import com.github.volfor.diary.screens.login.LoginActivity.Event.Login
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel : BaseViewModel<LoginActivity.Event>() {
     private val providers = arrayListOf(AuthUI.IdpConfig.GoogleBuilder().build())
 
-    private val _uiEvents = MutableLiveData<Event<LoginActivity.Event>>()
-
-    val uiEvents: LiveData<Event<LoginActivity.Event>>
-        get() = _uiEvents
-
     fun login() {
-        _uiEvents.value = Event(Login(providers))
+        _viewAction.value = Login(providers)
     }
 
     fun showHome() {
-        _uiEvents.value = Event(Home)
+        _viewAction.value = Home
     }
 
     fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {

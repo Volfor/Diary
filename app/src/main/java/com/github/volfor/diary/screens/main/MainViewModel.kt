@@ -1,20 +1,15 @@
 package com.github.volfor.diary.screens.main
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.github.volfor.diary.extensions.Event
+import com.github.volfor.diary.base.BaseViewModel
 
-class MainViewModel : ViewModel() {
-
-    private val _uiEvents = MutableLiveData<Event<MainActivity.Event>>()
-
-    val uiEvents: LiveData<Event<MainActivity.Event>>
-        get() = _uiEvents
-
+class MainViewModel : BaseViewModel<MainActivity.Event>() {
     val message = "Vm message!"
 
     fun onClick() {
-        _uiEvents.value = Event(MainActivity.Event.Toast("Message from vm"))
+        _viewAction.value = MainActivity.Event.Toast("Message from ViewModel")
+    }
+
+    fun onDialog() {
+        _viewAction.value = MainActivity.Event.Dialog("Dialog message from ViewModel")
     }
 }
