@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme"
         >
 
-        <activity android:name=".screens.login.LoginActivity">
+        <activity android:name=".screens.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,6 +22,7 @@
         </activity>
 
         <activity android:name=".screens.main.MainActivity" />
+        <activity android:name=".screens.login.LoginActivity" />
     </application>
 
 </manifest>

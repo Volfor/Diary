@@ -8,6 +8,7 @@ import com.github.volfor.diary.databinding.ActivityLoginBinding
 import com.github.volfor.diary.livedata.ViewAction
 import com.github.volfor.diary.livedata.observeEvent
 import com.github.volfor.diary.screens.main.MainActivity
+import com.github.volfor.diary.startActivityAndFinish
 
 const val RC_AUTH = 1324
 
@@ -25,8 +26,7 @@ class LoginActivity : BaseBoundVmActivity<ActivityLoginBinding, LoginViewModel>(
             when (it) {
                 is Event.Login -> startLoginFlow(it.providers)
                 is Event.Home -> {
-                    startActivity(Intent(this, MainActivity::class.java))
-                    finish()
+                    startActivityAndFinish(MainActivity::class)
                 }
             }
         }
