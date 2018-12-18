@@ -5,11 +5,11 @@ import com.firebase.ui.auth.AuthUI
 import com.github.volfor.diary.R
 import com.github.volfor.diary.base.BaseBoundVmActivity
 import com.github.volfor.diary.databinding.ActivityMainBinding
+import com.github.volfor.diary.extensions.startActivityAndFinish
+import com.github.volfor.diary.extensions.toast
 import com.github.volfor.diary.livedata.ViewAction
 import com.github.volfor.diary.livedata.observeEvent
 import com.github.volfor.diary.screens.login.LoginActivity
-import com.github.volfor.diary.startActivityAndFinish
-import com.github.volfor.diary.toast
 
 class MainActivity : BaseBoundVmActivity<ActivityMainBinding, MainViewModel>(
     R.layout.activity_main,

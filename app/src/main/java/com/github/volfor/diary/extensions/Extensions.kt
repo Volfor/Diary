@@ -1,4 +1,4 @@
-package com.github.volfor.diary
+package com.github.volfor.diary.extensions
 
 import android.app.Activity
 import android.content.Intent

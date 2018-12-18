@@ -52,6 +52,10 @@ dependencies {
     // Kotlin
     implementation(kotlin("stdlib", rootProject.extra["kotlinVersion"] as String))
 
+    // Rx
+    implementation("io.reactivex.rxjava2:rxkotlin:2.3.0")
+    implementation("io.reactivex.rxjava2:rxandroid:2.1.0")
+
     // DI
     implementation("org.kodein.di:kodein-di-generic-jvm:$kodeinVersion")
     implementation("org.kodein.di:kodein-di-framework-android-x:$kodeinVersion")
@@ -59,6 +63,7 @@ dependencies {
     // Firebase
     implementation("com.google.firebase:firebase-core:16.0.6")
     implementation("com.firebaseui:firebase-ui-auth:4.2.1")
+    implementation("com.google.firebase:firebase-database:16.0.5")
 
     // Logging
     implementation("com.github.ajalt:timberkt:1.5.1")

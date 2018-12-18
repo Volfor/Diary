@@ -6,19 +6,25 @@ import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.ErrorCodes
 import com.firebase.ui.auth.IdpResponse
 import com.github.ajalt.timberkt.d
+import com.github.ajalt.timberkt.e
 import com.github.volfor.diary.base.BaseViewModel
-import com.github.volfor.diary.screens.login.LoginActivity.Event.Home
-import com.github.volfor.diary.screens.login.LoginActivity.Event.Login
+import com.github.volfor.diary.extensions.async
+import com.github.volfor.diary.repositories.UserRepository
+import com.github.volfor.diary.screens.login.LoginActivity.Event
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
-class LoginViewModel : BaseViewModel<LoginActivity.Event>() {
+class LoginViewModel(
+    private val userRepository: UserRepository
+) : BaseViewModel<LoginActivity.Event>() {
     private val providers = arrayListOf(AuthUI.IdpConfig.GoogleBuilder().build())
 
     fun login() {
-        _viewAction.value = Login(providers)
+        _viewAction.value = Event.Login(providers)
     }
 
     fun showHome() {
-        _viewAction.value = Home
+        _viewAction.value = Event.Home
     }
 
     fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {
@@ -26,10 +32,10 @@ class LoginViewModel : BaseViewModel<LoginActivity.Event>() {
             RC_AUTH -> {
                 val response = IdpResponse.fromResultIntent(data)
                 if (resultCode == Activity.RESULT_OK) {
-                    showHome()
+                    // Sign in successful
+                    saveUser(FirebaseAuth.getInstance().currentUser)
                 } else {
                     // Sign in failed
-
                     when {
                         response == null -> // User pressed back button
                             d { "Auth error: canceled by user" }
@@ -43,5 +49,27 @@ class LoginViewModel : BaseViewModel<LoginActivity.Event>() {
             }
         }
         return false
+    }
+
+    private fun saveUser(user: FirebaseUser?) {
+        if (user == null) {
+            _viewAction.value = Event.Error
+            return
+        }
+
+        subscribe(
+            userRepository.create(user)
+                .async()
+                .subscribe({ successful ->
+                    if (successful) {
+                        showHome()
+                    } else {
+                        _viewAction.value = Event.Error
+                    }
+                }, {
+                    e(it)
+                    _viewAction.value = Event.Error
+                })
+        )
     }
 }
