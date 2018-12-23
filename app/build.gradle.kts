@@ -37,12 +37,13 @@ dependencies {
     val kodeinVersion = "6.0.1"
     val lifecycleVersion = "2.0.0"
     val navigationVersion = "1.0.0-alpha08"
+    val bindingAdapterVersion = "3.0.0-beta3"
 
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
-    // Support libs
     implementation("androidx.appcompat:appcompat:$appcompatVersion")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.0-alpha2")
+    implementation("androidx.constraintlayout:constraintlayout:2.0.0-alpha3")
+    implementation("androidx.cardview:cardview:1.0.0")
 
     // Architecture components
     implementation("androidx.lifecycle:lifecycle-extensions:$lifecycleVersion")
@@ -64,6 +65,10 @@ dependencies {
     implementation("com.google.firebase:firebase-core:16.0.6")
     implementation("com.firebaseui:firebase-ui-auth:4.2.1")
     implementation("com.google.firebase:firebase-database:16.0.5")
+
+    // Data Binding
+    implementation("me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:$bindingAdapterVersion")
+    implementation("me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:$bindingAdapterVersion")
 
     // Logging
     implementation("com.github.ajalt:timberkt:1.5.1")

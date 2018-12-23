@@ -3,6 +3,8 @@ package com.github.volfor.diary.extensions
 import android.app.Activity
 import android.content.Intent
 import android.widget.Toast
+import androidx.databinding.ObservableArrayList
+import androidx.databinding.ObservableList
 import androidx.fragment.app.Fragment
 import kotlin.reflect.KClass
 
@@ -31,3 +33,5 @@ fun Activity.toast(message: String) {
 fun Fragment.toast(message: String) {
     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }
+
+inline fun <T> observableListOf(): ObservableList<T> = ObservableArrayList()

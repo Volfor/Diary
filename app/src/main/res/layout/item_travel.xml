@@ -1,0 +1,66 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.github.volfor.diary.screens.travels.item.TravelItem"
+            />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        style="@style/Widget.MaterialComponents.CardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/card_height"
+        app:cardCornerRadius="4dp"
+        tools:layout_marginBottom="4dp"
+        tools:layout_marginEnd="@dimen/recycler_divider"
+        tools:layout_marginStart="@dimen/recycler_divider"
+        tools:layout_marginTop="4dp"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:maxHeight="@dimen/card_height"
+            android:scaleType="centerCrop"
+            android:src="@drawable/tokyo_japan"
+            android:tint="#55000000"
+            tools:ignore="ContentDescription"
+            tools:src="@tools:sample/backgrounds/scenic"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{item.title}"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                tools:text="@tools:sample/lorem"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@{item.date}"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                tools:text="October 10 - 16"
+                />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>
