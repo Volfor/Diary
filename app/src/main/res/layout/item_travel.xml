@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.github.volfor.diary.models.Travel"
+            type="com.github.volfor.diary.screens.travels.item.TravelItem"
             />
     </data>
 
@@ -57,10 +57,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:text="@{item.date}"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 tools:text="October 10 - 16"
                 />
         </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="@{() -> item.onClick()}"
+            />
     </com.google.android.material.card.MaterialCardView>
 </layout>
