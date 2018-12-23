@@ -6,14 +6,14 @@ import androidx.recyclerview.widget.RecyclerView
 
 class SpaceItemDecorator(private val space: Int) : RecyclerView.ItemDecoration() {
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-        parent.apply {
-            if (getChildAdapterPosition(view) == 0) {
-                outRect.top = space
+        with(outRect) {
+            if (parent.getChildAdapterPosition(view) == 0) {
+                top = space
             }
 
-            outRect.left = space
-            outRect.right = space
-            outRect.bottom = space
+            left = space
+            right = space
+            bottom = space
         }
     }
 }

@@ -1,22 +1,22 @@
 package com.github.volfor.diary.screens.travels
 
-import com.github.volfor.diary.BR
-import com.github.volfor.diary.R
+import androidx.lifecycle.LifecycleOwner
+import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.github.volfor.diary.base.BaseViewModel
-import com.github.volfor.diary.extensions.observableListOf
 import com.github.volfor.diary.livedata.ViewAction
 import com.github.volfor.diary.models.Travel
-import com.github.volfor.diary.screens.travels.item.TravelItem
-import me.tatarka.bindingcollectionadapter2.ItemBinding
+import com.github.volfor.diary.repositories.TravelsRepository
 
-class TravelsViewModel : BaseViewModel<ViewAction>() {
 
-    val items = observableListOf<TravelItem>()
-    val itemBinding: ItemBinding<TravelItem> = ItemBinding.of(BR.item, R.layout.item_travel)
+class TravelsViewModel(
+    private val travelsRepository: TravelsRepository
+) : BaseViewModel<ViewAction>() {
+    lateinit var options: FirebaseRecyclerOptions<Travel>
 
-    init {
-        for (i in 0..10) {
-            items.add(TravelItem(Travel("Travel to Country #$i")))
-        }
+    fun init(lifecycleOwner: LifecycleOwner) {
+        options = FirebaseRecyclerOptions.Builder<Travel>()
+            .setQuery(travelsRepository.loadTravels(), Travel::class.java)
+            .setLifecycleOwner(lifecycleOwner)
+            .build()
     }
 }

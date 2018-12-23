@@ -1,5 +1,6 @@
 package com.github.volfor.diary.di
 
+import com.github.volfor.diary.repositories.TravelsRepository
 import com.github.volfor.diary.repositories.UserRepository
 import com.github.volfor.diary.screens.login.LoginViewModel
 import com.github.volfor.diary.screens.main.MainViewModel
@@ -17,7 +18,7 @@ val viewModelsModule = Kodein.Module("View Models") {
 
     bind<MainViewModel>() with provider { MainViewModel() }
     bind<LoginViewModel>() with provider { LoginViewModel(instance()) }
-    bind<TravelsViewModel>() with provider { TravelsViewModel() }
+    bind<TravelsViewModel>() with provider { TravelsViewModel(instance()) }
 }
 
 val firebaseModule = Kodein.Module("Firebase") {
@@ -26,4 +27,5 @@ val firebaseModule = Kodein.Module("Firebase") {
 
 val repositoriesModule = Kodein.Module("Repositories") {
     bind<UserRepository>() with singleton { UserRepository(instance()) }
+    bind<TravelsRepository>() with singleton { TravelsRepository(instance()) }
 }

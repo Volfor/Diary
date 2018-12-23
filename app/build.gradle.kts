@@ -38,6 +38,7 @@ dependencies {
     val lifecycleVersion = "2.0.0"
     val navigationVersion = "1.0.0-alpha08"
     val bindingAdapterVersion = "3.0.0-beta3"
+    val firebaseUIVersion = "4.3.0"
 
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
@@ -63,8 +64,9 @@ dependencies {
 
     // Firebase
     implementation("com.google.firebase:firebase-core:16.0.6")
-    implementation("com.firebaseui:firebase-ui-auth:4.2.1")
     implementation("com.google.firebase:firebase-database:16.0.5")
+    implementation("com.firebaseui:firebase-ui-auth:$firebaseUIVersion")
+    implementation("com.firebaseui:firebase-ui-database:$firebaseUIVersion")
 
     // Data Binding
     implementation("me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:$bindingAdapterVersion")
