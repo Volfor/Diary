@@ -39,6 +39,7 @@ dependencies {
     val navigationVersion = "1.0.0-alpha08"
     val bindingAdapterVersion = "3.0.0-beta3"
     val firebaseUIVersion = "4.3.0"
+    val leakCanaryVersion = "1.6.2"
 
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
@@ -71,6 +72,11 @@ dependencies {
     // Data Binding
     implementation("me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:$bindingAdapterVersion")
     implementation("me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:$bindingAdapterVersion")
+
+    // Leak canary
+    debugImplementation("com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion")
+    debugImplementation("com.squareup.leakcanary:leakcanary-support-fragment:$leakCanaryVersion")
+    releaseImplementation("com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion")
 
     // Logging
     implementation("com.github.ajalt:timberkt:1.5.1")
