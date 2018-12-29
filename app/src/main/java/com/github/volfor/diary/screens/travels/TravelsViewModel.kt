@@ -26,4 +26,8 @@ class TravelsViewModel(
     override fun onTravelSelected(item: TravelItem) {
         _viewAction.value = Event.Toast("item ${item.title} selected")
     }
+
+    fun createTravel() {
+        _viewAction.value = Event.NewTravel
+    }
 }
