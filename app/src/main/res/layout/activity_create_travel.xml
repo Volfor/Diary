@@ -14,19 +14,30 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="16dp"
         >
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
         <EditText
             android:id="@+id/fTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:hint="Title"
             android:text="@={vm.title}"
             app:layout_constraintBottom_toTopOf="@+id/fDescription"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
             app:layout_constraintVertical_bias="0.1"
             app:layout_constraintVertical_chainStyle="packed"
             />
@@ -35,13 +46,46 @@
             android:id="@+id/fDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
             android:hint="Description"
             android:text="@={vm.description}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fTitle"
+            />
+
+        <EditText
+            android:id="@+id/fStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            android:editable="false"
+            android:focusable="false"
+            android:hint="@{vm.startDate}"
+            android:onClick="@{() -> vm.pickStartDate()}"
+            app:layout_constraintEnd_toStartOf="@+id/fEnd"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fDescription"
+            tools:hint="Wed, Jan 2"
+            />
+
+        <EditText
+            android:id="@+id/fEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:editable="false"
+            android:focusable="false"
+            android:hint="@{vm.endDate}"
+            android:onClick="@{() -> vm.pickEndDate()}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/fStart"
+            app:layout_constraintTop_toTopOf="@+id/fStart"
+            tools:hint="Wed, Jan 9"
             />
 
         <Button
@@ -52,8 +96,7 @@
             android:text="Done"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fDescription"
+            app:layout_constraintTop_toBottomOf="@+id/fStart"
             />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

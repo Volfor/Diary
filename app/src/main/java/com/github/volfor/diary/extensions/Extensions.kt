@@ -1,11 +1,13 @@
 package com.github.volfor.diary.extensions
 
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.widget.Toast
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableList
 import androidx.fragment.app.Fragment
+import java.util.Calendar
 import kotlin.reflect.KClass
 
 fun Activity.startActivity(cls: KClass<*>) {
@@ -35,3 +37,11 @@ fun Fragment.toast(message: String) {
 }
 
 inline fun <T> observableListOf(): ObservableList<T> = ObservableArrayList()
+
+fun Calendar.update(year: Int, month: Int, day: Int): Calendar {
+    set(Calendar.YEAR, year)
+    set(Calendar.MONTH, month)
+    set(Calendar.DAY_OF_MONTH, day)
+
+    return this
+}

@@ -13,6 +13,7 @@ import com.github.volfor.diary.repositories.UserRepository
 import com.github.volfor.diary.screens.login.LoginActivity.Event
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import io.reactivex.rxkotlin.subscribeBy
 
 class LoginViewModel(
     private val userRepository: UserRepository
@@ -57,19 +58,20 @@ class LoginViewModel(
             return
         }
 
-        subscribe(
-            userRepository.create(user)
-                .async()
-                .subscribe({ successful ->
+        userRepository.create(user)
+            .async()
+            .subscribeBy(
+                onNext = { successful ->
                     if (successful) {
                         showHome()
                     } else {
                         _viewAction.value = Event.Error
                     }
-                }, {
+                },
+                onError = {
                     e(it)
                     _viewAction.value = Event.Error
-                })
-        )
+                }
+            ).add()
     }
 }
