@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.github.volfor.diary.screens.travels.item.TravelItem"
+            type="com.github.volfor.diary.screens.travel.list.TravelItem"
             />
     </data>
 

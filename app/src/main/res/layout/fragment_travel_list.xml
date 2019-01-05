@@ -7,9 +7,10 @@
 
         <variable
             name="vm"
-            type="com.github.volfor.diary.screens.travels.TravelsViewModel"
+            type="com.github.volfor.diary.screens.travel.list.TravelListViewModel"
             />
     </data>
+
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"

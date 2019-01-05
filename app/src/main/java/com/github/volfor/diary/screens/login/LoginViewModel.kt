@@ -7,25 +7,29 @@ import com.firebase.ui.auth.ErrorCodes
 import com.firebase.ui.auth.IdpResponse
 import com.github.ajalt.timberkt.d
 import com.github.ajalt.timberkt.e
-import com.github.volfor.diary.base.BaseViewModel
+import com.github.volfor.diary.base.BaseEventViewModel
 import com.github.volfor.diary.extensions.async
 import com.github.volfor.diary.repositories.UserRepository
-import com.github.volfor.diary.screens.login.LoginActivity.Event
+import com.github.volfor.diary.screens.login.LoginFragment.Event
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import io.reactivex.rxkotlin.subscribeBy
 
 class LoginViewModel(
     private val userRepository: UserRepository
-) : BaseViewModel<LoginActivity.Event>() {
+) : BaseEventViewModel<LoginFragment.Event>() {
     private val providers = arrayListOf(AuthUI.IdpConfig.GoogleBuilder().build())
 
     fun login() {
-        _viewAction.value = Event.Login(providers)
+        sendEvent(Event.Login(providers))
     }
 
     fun showHome() {
-        _viewAction.value = Event.Home
+        sendEvent(Event.Home)
+    }
+
+    fun showError() {
+        sendEvent(Event.Error)
     }
 
     fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {
@@ -54,7 +58,7 @@ class LoginViewModel(
 
     private fun saveUser(user: FirebaseUser?) {
         if (user == null) {
-            _viewAction.value = Event.Error
+            showError()
             return
         }
 
@@ -65,12 +69,12 @@ class LoginViewModel(
                     if (successful) {
                         showHome()
                     } else {
-                        _viewAction.value = Event.Error
+                        showError()
                     }
                 },
                 onError = {
                     e(it)
-                    _viewAction.value = Event.Error
+                    showError()
                 }
             ).add()
     }

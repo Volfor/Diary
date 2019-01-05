@@ -1,4 +1,4 @@
-package com.github.volfor.diary.screens.travels.item
+package com.github.volfor.diary.screens.travel.list
 
 import com.github.volfor.diary.models.Travel
 

@@ -1,23 +1,22 @@
-package com.github.volfor.diary.screens.travels.create
+package com.github.volfor.diary.screens.travel.create
 
 import androidx.databinding.Bindable
 import androidx.lifecycle.MutableLiveData
 import com.github.ajalt.timberkt.e
 import com.github.volfor.diary.BR
-import com.github.volfor.diary.base.BaseViewModel
+import com.github.volfor.diary.base.BaseEventViewModel
 import com.github.volfor.diary.extensions.async
-import com.github.volfor.diary.livedata.ViewAction
 import com.github.volfor.diary.models.Travel
 import com.github.volfor.diary.repositories.TravelsRepository
-import com.github.volfor.diary.screens.travels.create.CreateTravelActivity.Event
+import com.github.volfor.diary.screens.travel.create.TravelCreateFragment.Event
 import io.reactivex.rxkotlin.subscribeBy
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class CreateTravelViewModel(
+class TravelCreateViewModel(
     private val travelsRepository: TravelsRepository
-) : BaseViewModel<ViewAction>() {
+) : BaseEventViewModel<TravelCreateFragment.Event>() {
 
     val title = MutableLiveData<String>()
     val description = MutableLiveData<String>()
@@ -54,16 +53,20 @@ class CreateTravelViewModel(
     }
 
     fun pickStartDate() {
-        _viewAction.value = Event.StartDate(start)
+        sendEvent(Event.StartDate(start))
     }
 
     fun pickEndDate() {
-        _viewAction.value = Event.EndDate(end)
+        sendEvent(Event.EndDate(end))
+    }
+
+    fun showMessage(message: String) {
+        sendEvent(Event.Toast(message))
     }
 
     fun done() {
         if (title.value.isNullOrEmpty()) {
-            _viewAction.value = Event.Toast("Title is required")
+            showMessage("Title is required")
             return
         }
 
@@ -79,14 +82,14 @@ class CreateTravelViewModel(
             .subscribeBy(
                 onNext = { successful ->
                     if (successful) {
-                        _viewAction.value = Event.Finish
+                        sendEvent(Event.Done)
                     } else {
-                        _viewAction.value = Event.Toast("Error")
+                        showMessage("Error")
                     }
                 },
                 onError = {
                     e(it)
-                    _viewAction.value = Event.Toast("Error")
+                    showMessage("Error")
                 }
             ).add()
     }

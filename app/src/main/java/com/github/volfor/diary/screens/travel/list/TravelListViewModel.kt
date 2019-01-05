@@ -1,17 +1,16 @@
-package com.github.volfor.diary.screens.travels
+package com.github.volfor.diary.screens.travel.list
 
 import androidx.lifecycle.LifecycleOwner
 import com.firebase.ui.database.FirebaseRecyclerOptions
-import com.github.volfor.diary.base.BaseViewModel
+import com.github.volfor.diary.base.BaseEventViewModel
 import com.github.volfor.diary.models.Travel
 import com.github.volfor.diary.repositories.TravelsRepository
-import com.github.volfor.diary.screens.travels.TravelsActivity.Event
-import com.github.volfor.diary.screens.travels.item.TravelItem
+import com.github.volfor.diary.screens.travel.list.TravelListFragment.Event
 
 
-class TravelsViewModel(
+class TravelListViewModel(
     private val travelsRepository: TravelsRepository
-) : BaseViewModel<TravelsActivity.Event>(), TravelItem.Interactor {
+) : BaseEventViewModel<TravelListFragment.Event>(), TravelItem.Interactor {
     lateinit var options: FirebaseRecyclerOptions<TravelItem>
 
     fun init(lifecycleOwner: LifecycleOwner) {
@@ -24,10 +23,10 @@ class TravelsViewModel(
     }
 
     override fun onTravelSelected(item: TravelItem) {
-        _viewAction.value = Event.Toast("item ${item.title} selected")
+        sendEvent(Event.Toast("item ${item.title} selected"))
     }
 
     fun createTravel() {
-        _viewAction.value = Event.NewTravel
+        sendEvent(Event.NewTravel)
     }
 }

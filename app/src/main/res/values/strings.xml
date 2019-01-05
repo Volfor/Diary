@@ -3,4 +3,9 @@
 
     <string name="app_full_name">Traveler\'s Diary</string>
     <string name="app_slogan">Don\'t let your memories fade</string>
+
+    <string name="login">Login</string>
+    <string name="travels">Travels</string>
+    <string name="create_travel">Create Travel</string>
+
 </resources>

@@ -1,4 +1,4 @@
-package com.github.volfor.diary.application
+package com.github.volfor.diary.app
 
 import android.app.Application
 import com.github.ajalt.timberkt.Timber

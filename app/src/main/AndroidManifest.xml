@@ -5,7 +5,7 @@
     >
 
     <application
-        android:name=".application.App"
+        android:name=".app.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -15,18 +15,16 @@
         tools:ignore="GoogleAppIndexingWarning"
         >
 
-        <activity android:name=".screens.splash.SplashActivity">
+        <activity
+            android:name=".app.AppActivity"
+            android:theme="@style/AppTheme.Splash"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".screens.main.MainActivity" />
-        <activity android:name=".screens.login.LoginActivity" />
-        <activity android:name=".screens.travels.TravelsActivity" />
-        <activity android:name=".screens.travels.create.CreateTravelActivity" />
     </application>
 
 </manifest>
