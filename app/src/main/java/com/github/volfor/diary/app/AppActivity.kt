@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.github.volfor.diary.R
+import com.github.volfor.diary.screens.login.LoginFragmentDirections
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
@@ -14,6 +15,8 @@ import org.kodein.di.generic.instance
 class AppActivity : AppCompatActivity(), KodeinAware {
 
     override val kodein: Kodein by closestKodein()
+
+    private val navController by lazy { findNavController(R.id.navHostFragment) }
 
     private val vm: AppViewModel by lazy {
         ViewModelProviders.of(this, direct.instance()).get(AppViewModel::class.java)
@@ -25,7 +28,7 @@ class AppActivity : AppCompatActivity(), KodeinAware {
         setContentView(R.layout.activity_app)
 
         if (vm.isUserLoggedIn()) {
-            findNavController(R.id.navHostFragment).navigate(R.id.action_loginFragment_to_travelListFragment)
+            navController.navigate(LoginFragmentDirections.actionOpenTravelList())
         }
     }
 }

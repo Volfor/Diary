@@ -16,17 +16,20 @@ class TravelListViewModel(
     fun init(lifecycleOwner: LifecycleOwner) {
         options = FirebaseRecyclerOptions.Builder<TravelItem>()
             .setQuery(travelsRepository.loadTravels()) { snapshot ->
-                TravelItem(this, snapshot.getValue(Travel::class.java)!!)
+                val travel = snapshot.getValue(Travel::class.java)!!
+                travel.id = snapshot.key
+
+                TravelItem(this, travel)
             }
             .setLifecycleOwner(lifecycleOwner)
             .build()
     }
 
     override fun onTravelSelected(item: TravelItem) {
-        sendEvent(Event.Toast("item ${item.title} selected"))
+        item.id?.let { sendEvent(Event.Open(it)) }
     }
 
     fun createTravel() {
-        sendEvent(Event.NewTravel)
+        sendEvent(Event.New)
     }
 }

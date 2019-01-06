@@ -4,6 +4,7 @@ import com.github.volfor.diary.app.AppViewModel
 import com.github.volfor.diary.repositories.TravelsRepository
 import com.github.volfor.diary.repositories.UserRepository
 import com.github.volfor.diary.screens.login.LoginViewModel
+import com.github.volfor.diary.screens.travel.TravelViewModel
 import com.github.volfor.diary.screens.travel.create.TravelCreateViewModel
 import com.github.volfor.diary.screens.travel.list.TravelListViewModel
 import com.google.firebase.database.FirebaseDatabase
@@ -21,6 +22,7 @@ val viewModelsModule = Kodein.Module("View Models") {
     bind<LoginViewModel>() with provider { LoginViewModel(instance()) }
     bind<TravelListViewModel>() with provider { TravelListViewModel(instance()) }
     bind<TravelCreateViewModel>() with provider { TravelCreateViewModel(instance()) }
+    bind<TravelViewModel>() with provider { TravelViewModel() }
 }
 
 val firebaseModule = Kodein.Module("Firebase") {

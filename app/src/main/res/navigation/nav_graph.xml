@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_login"
         >
         <action
-            android:id="@+id/action_loginFragment_to_travelListFragment"
+            android:id="@+id/action_openTravelList"
             app:destination="@id/travelListFragment"
             app:launchSingleTop="true"
             app:popUpTo="@+id/loginFragment"
@@ -26,8 +26,12 @@
         tools:layout="@layout/fragment_travel_list"
         >
         <action
-            android:id="@+id/action_travelListFragment_to_createTravelFragment"
+            android:id="@+id/action_createTravel"
             app:destination="@id/createTravelFragment"
+            />
+        <action
+            android:id="@+id/action_openTravel"
+            app:destination="@id/travelFragment"
             />
     </fragment>
     <fragment
@@ -36,4 +40,15 @@
         android:label="@string/create_travel"
         tools:layout="@layout/fragment_travel_create"
         />
+    <fragment
+        android:id="@+id/travelFragment"
+        android:name="com.github.volfor.diary.screens.travel.TravelFragment"
+        android:label="fragment_travel"
+        tools:layout="@layout/fragment_travel"
+        >
+        <argument
+            android:name="travelId"
+            app:argType="string"
+            />
+    </fragment>
 </navigation>

@@ -10,6 +10,9 @@ class TravelItem(
         fun onTravelSelected(item: TravelItem)
     }
 
+    val id: String?
+        get() = travel.id
+
     val title: String
         get() = travel.title ?: ""
 

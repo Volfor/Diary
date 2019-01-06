@@ -9,6 +9,7 @@ import com.github.volfor.diary.databinding.FragmentLoginBinding
 import com.github.volfor.diary.extensions.toast
 import com.github.volfor.diary.livedata.ViewAction
 import com.github.volfor.diary.livedata.observeEvent
+import com.github.volfor.diary.screens.login.LoginFragmentDirections as Directions
 
 const val RC_AUTH = 1324
 
@@ -26,9 +27,7 @@ class LoginFragment : BaseBoundVmFragment<FragmentLoginBinding, LoginViewModel>(
         vm.viewAction.observeEvent(this) {
             when (it) {
                 is Event.Login -> startLoginFlow(it.providers)
-                is Event.Home -> {
-                    findNavController().navigate(R.id.action_loginFragment_to_travelListFragment)
-                }
+                is Event.Home -> findNavController().navigate(Directions.actionOpenTravelList())
                 is Event.Error -> toast("Login error")
             }
         }
