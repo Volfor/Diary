@@ -7,6 +7,8 @@ import android.widget.Toast
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableList
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import java.util.Calendar
 import kotlin.reflect.KClass
 
@@ -44,4 +46,8 @@ fun Calendar.update(year: Int, month: Int, day: Int): Calendar {
     set(Calendar.DAY_OF_MONTH, day)
 
     return this
+}
+
+fun <X, Y> LiveData<X>.map(mapFunc: (input: X) -> Y): LiveData<Y> {
+    return Transformations.map(this, mapFunc)
 }

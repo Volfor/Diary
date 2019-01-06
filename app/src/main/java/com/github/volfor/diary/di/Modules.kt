@@ -22,7 +22,7 @@ val viewModelsModule = Kodein.Module("View Models") {
     bind<LoginViewModel>() with provider { LoginViewModel(instance()) }
     bind<TravelListViewModel>() with provider { TravelListViewModel(instance()) }
     bind<TravelCreateViewModel>() with provider { TravelCreateViewModel(instance()) }
-    bind<TravelViewModel>() with provider { TravelViewModel() }
+    bind<TravelViewModel>() with provider { TravelViewModel(instance()) }
 }
 
 val firebaseModule = Kodein.Module("Firebase") {
