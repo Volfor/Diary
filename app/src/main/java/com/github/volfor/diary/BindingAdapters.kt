@@ -3,10 +3,14 @@ package com.github.volfor.diary
 import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.databinding.BindingAdapter
+import androidx.databinding.BindingConversion
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.github.volfor.diary.adapters.FirebaseBindingRecyclerAdapter
 import com.google.android.gms.common.SignInButton
+
+@BindingConversion
+fun convertBooleanToVisibility(isVisible: Boolean) = if (isVisible) View.VISIBLE else View.GONE
 
 @BindingAdapter("onSignInClick")
 fun setGoogleSignInButtonClickListener(button: SignInButton, listener: View.OnClickListener) {
