@@ -1,6 +1,6 @@
 package com.github.volfor.diary.repositories
 
-import com.github.volfor.diary.USERS_REF
+import com.github.volfor.diary.Firebase
 import com.github.volfor.diary.base.BaseRepository
 import com.github.volfor.diary.models.User
 import com.google.firebase.auth.FirebaseUser
@@ -10,7 +10,7 @@ import io.reactivex.subjects.PublishSubject
 class UserRepository(
     database: FirebaseDatabase
 ) : BaseRepository() {
-    override val ref by lazy { database.getReference(USERS_REF) }
+    override val ref by lazy { database.getReference(Firebase.User.REF) }
 
     fun create(firebaseUser: FirebaseUser): PublishSubject<Boolean> {
         val result = PublishSubject.create<Boolean>()

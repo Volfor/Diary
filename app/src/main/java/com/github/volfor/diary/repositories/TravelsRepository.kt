@@ -2,7 +2,7 @@ package com.github.volfor.diary.repositories
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import com.github.volfor.diary.TRAVELS_REF
+import com.github.volfor.diary.Firebase
 import com.github.volfor.diary.base.BaseRepository
 import com.github.volfor.diary.extensions.map
 import com.github.volfor.diary.livedata.FirebaseQueryLiveData
@@ -16,14 +16,20 @@ class TravelsRepository(
     database: FirebaseDatabase
 ) : BaseRepository() {
     override val ref by lazy {
-        database.getReference(TRAVELS_REF)
+        database.getReference(Firebase.Travel.REF)
             .child(FirebaseAuth.getInstance().currentUser!!.uid)
     }
 
-    fun loadTravels() = ref.orderByValue()
+    fun loadTravels(): LiveData<List<Travel>> {
+        return Transformations.map(FirebaseQueryLiveData(ref.orderByChild(Firebase.Travel.KEY_START))) { snapshot ->
+            snapshot.children.map {
+                it.getValue(Travel::class.java)!!.apply { id = it.key }
+            }.reversed()
+        }
+    }
 
     fun loadTravel(id: String) = FirebaseQueryLiveData(ref.child(id)).map {
-        it.getValue(Travel::class.java)!!
+        it.getValue(Travel::class.java)!!.apply { this.id = it.key }
     }
 
     fun saveTravel(travel: Travel): PublishSubject<Boolean> {

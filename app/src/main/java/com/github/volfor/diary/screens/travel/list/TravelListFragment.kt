@@ -1,7 +1,5 @@
 package com.github.volfor.diary.screens.travel.list
 
-import android.os.Bundle
-import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.github.volfor.diary.R
 import com.github.volfor.diary.base.BaseBoundVmFragment
@@ -18,11 +16,6 @@ class TravelListFragment : BaseBoundVmFragment<FragmentTravelListBinding, Travel
     sealed class Event : ViewAction {
         object New : Event()
         data class Open(val travelId: String) : Event()
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        vm.init(this)
     }
 
     override fun initObservers() {

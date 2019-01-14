@@ -38,7 +38,7 @@ dependencies {
     val kodeinVersion = "6.0.1"
     val lifecycleVersion = "2.0.0"
     val navigationVersion = "1.0.0-alpha08"
-    val bindingAdapterVersion = "3.0.0-beta3"
+    val bindingAdapterVersion = "1c7e24ea7a"
     val firebaseUIVersion = "4.3.0"
     val leakCanaryVersion = "1.6.2"
 
@@ -71,8 +71,9 @@ dependencies {
     implementation("com.firebaseui:firebase-ui-database:$firebaseUIVersion")
 
     // Data Binding
-    implementation("me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:$bindingAdapterVersion")
-    implementation("me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:$bindingAdapterVersion")
+    implementation("com.github.Volfor.binding-collection-adapter:bindingcollectionadapter:$bindingAdapterVersion")
+    implementation("com.github.Volfor.binding-collection-adapter:bindingcollectionadapter-recyclerview:$bindingAdapterVersion")
+    implementation("com.github.Volfor.binding-collection-adapter:bindingcollectionadapter-ktx:$bindingAdapterVersion")
 
     // Leak canary
     debugImplementation("com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion")
