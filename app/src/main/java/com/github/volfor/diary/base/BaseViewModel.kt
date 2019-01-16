@@ -3,21 +3,25 @@ package com.github.volfor.diary.base
 import androidx.databinding.Observable
 import androidx.databinding.PropertyChangeRegistry
 import androidx.lifecycle.ViewModel
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
-import io.reactivex.rxkotlin.addTo
+import com.github.volfor.diary.CoroutineContextHolder
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlin.coroutines.CoroutineContext
 
 @Suppress("PropertyName")
-open class BaseViewModel : ViewModel(), Observable {
+abstract class BaseViewModel(
+    ctx: CoroutineContextHolder
+) : ViewModel(), CoroutineContextHolder by ctx, CoroutineScope, Observable {
     @Transient
     private var callbacks: PropertyChangeRegistry? = null
 
-    private val disposables = CompositeDisposable()
+    private val job = Job()
 
-    fun Disposable.add() = addTo(disposables)
+    override val coroutineContext: CoroutineContext
+        get() = job + main
 
     override fun onCleared() {
-        disposables.clear()
+        job.cancel()
         super.onCleared()
     }
 

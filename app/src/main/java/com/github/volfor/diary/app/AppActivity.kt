@@ -27,7 +27,7 @@ class AppActivity : AppCompatActivity(), KodeinAware {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_app)
 
-        if (vm.isUserLoggedIn()) {
+        if (vm.isLoggedIn()) {
             navController.navigate(LoginFragmentDirections.actionOpenTravelList())
         }
     }

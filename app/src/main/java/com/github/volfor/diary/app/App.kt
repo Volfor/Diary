@@ -3,6 +3,7 @@ package com.github.volfor.diary.app
 import android.app.Application
 import com.github.ajalt.timberkt.Timber
 import com.github.volfor.diary.BuildConfig
+import com.github.volfor.diary.di.appModule
 import com.github.volfor.diary.di.firebaseModule
 import com.github.volfor.diary.di.repositoriesModule
 import com.github.volfor.diary.di.viewModelsModule
@@ -11,6 +12,7 @@ import org.kodein.di.KodeinAware
 
 class App : Application(), KodeinAware {
     override val kodein = Kodein.lazy {
+        import(appModule)
         import(viewModelsModule)
         import(firebaseModule)
         import(repositoriesModule)

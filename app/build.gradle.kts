@@ -55,10 +55,7 @@ dependencies {
 
     // Kotlin
     implementation(kotlin("stdlib", rootProject.extra["kotlinVersion"] as String))
-
-    // Rx
-    implementation("io.reactivex.rxjava2:rxkotlin:2.3.0")
-    implementation("io.reactivex.rxjava2:rxandroid:2.1.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.0")
 
     // DI
     implementation("org.kodein.di:kodein-di-generic-jvm:$kodeinVersion")

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.recyclerview.widget.DiffUtil
 import com.github.volfor.diary.BR
+import com.github.volfor.diary.CoroutineContextHolder
 import com.github.volfor.diary.R
 import com.github.volfor.diary.base.BaseEventViewModel
 import com.github.volfor.diary.repositories.TravelsRepository
@@ -14,8 +15,9 @@ import java.util.*
 
 
 class TravelListViewModel(
+    ctx: CoroutineContextHolder,
     private val travelsRepository: TravelsRepository
-) : BaseEventViewModel<TravelListFragment.Event>(), TravelItem.Listener {
+) : BaseEventViewModel<TravelListFragment.Event>(ctx), TravelItem.Listener {
 
     val items: LiveData<List<Any>> = getSortedTravels()
 

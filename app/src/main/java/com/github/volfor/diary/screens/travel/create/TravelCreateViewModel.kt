@@ -2,21 +2,21 @@ package com.github.volfor.diary.screens.travel.create
 
 import androidx.databinding.Bindable
 import androidx.lifecycle.MutableLiveData
-import com.github.ajalt.timberkt.e
 import com.github.volfor.diary.BR
+import com.github.volfor.diary.CoroutineContextHolder
 import com.github.volfor.diary.base.BaseEventViewModel
-import com.github.volfor.diary.extensions.async
 import com.github.volfor.diary.models.Travel
 import com.github.volfor.diary.repositories.TravelsRepository
 import com.github.volfor.diary.screens.travel.create.TravelCreateFragment.Event
-import io.reactivex.rxkotlin.subscribeBy
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 class TravelCreateViewModel(
+    ctx: CoroutineContextHolder,
     private val travelsRepository: TravelsRepository
-) : BaseEventViewModel<TravelCreateFragment.Event>() {
+) : BaseEventViewModel<TravelCreateFragment.Event>(ctx) {
 
     val title = MutableLiveData<String>()
     val description = MutableLiveData<String>()
@@ -77,20 +77,12 @@ class TravelCreateViewModel(
             end.timeInMillis
         )
 
-        travelsRepository.saveTravel(travel)
-            .async()
-            .subscribeBy(
-                onNext = { successful ->
-                    if (successful) {
-                        sendEvent(Event.Done)
-                    } else {
-                        showMessage("Error")
-                    }
-                },
-                onError = {
-                    e(it)
-                    showMessage("Error")
-                }
-            ).add()
+        launch {
+            if (travelsRepository.save(travel)) {
+                sendEvent(Event.Done)
+            } else {
+                showMessage("Error")
+            }
+        }
     }
 }

@@ -6,18 +6,18 @@ import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.ErrorCodes
 import com.firebase.ui.auth.IdpResponse
 import com.github.ajalt.timberkt.d
-import com.github.ajalt.timberkt.e
+import com.github.volfor.diary.CoroutineContextHolder
 import com.github.volfor.diary.base.BaseEventViewModel
-import com.github.volfor.diary.extensions.async
 import com.github.volfor.diary.repositories.UserRepository
 import com.github.volfor.diary.screens.login.LoginFragment.Event
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import io.reactivex.rxkotlin.subscribeBy
+import kotlinx.coroutines.launch
 
 class LoginViewModel(
+    ctx: CoroutineContextHolder,
     private val userRepository: UserRepository
-) : BaseEventViewModel<LoginFragment.Event>() {
+) : BaseEventViewModel<LoginFragment.Event>(ctx) {
     private val providers = arrayListOf(AuthUI.IdpConfig.GoogleBuilder().build())
 
     fun login() {
@@ -62,20 +62,12 @@ class LoginViewModel(
             return
         }
 
-        userRepository.create(user)
-            .async()
-            .subscribeBy(
-                onNext = { successful ->
-                    if (successful) {
-                        showHome()
-                    } else {
-                        showError()
-                    }
-                },
-                onError = {
-                    e(it)
-                    showError()
-                }
-            ).add()
+        launch {
+            if (userRepository.create(user)) {
+                showHome()
+            } else {
+                showError()
+            }
+        }
     }
 }
