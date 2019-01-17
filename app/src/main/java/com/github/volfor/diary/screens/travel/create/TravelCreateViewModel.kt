@@ -1,8 +1,8 @@
 package com.github.volfor.diary.screens.travel.create
 
-import androidx.databinding.Bindable
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.github.volfor.diary.BR
+import androidx.lifecycle.Transformations
 import com.github.volfor.diary.CoroutineContextHolder
 import com.github.volfor.diary.base.BaseEventViewModel
 import com.github.volfor.diary.models.Travel
@@ -21,43 +21,42 @@ class TravelCreateViewModel(
     val title = MutableLiveData<String>()
     val description = MutableLiveData<String>()
 
-    var start: Calendar = Calendar.getInstance()
-        @Bindable get
-        set(value) {
-            field = value
-            notifyPropertyChanged(BR.start)
-            if (end.before(value)) {
-                end = value.clone() as Calendar
-            }
-        }
-
-    var end: Calendar = Calendar.getInstance()
-        @Bindable get
-        set(value) {
-            field = value
-            notifyPropertyChanged(BR.end)
-        }
-
-    init {
-        end.add(Calendar.DAY_OF_MONTH, 7)
+    val start = MutableLiveData<Calendar>().apply {
+        value = Calendar.getInstance()
     }
 
-    @Bindable("start")
-    fun getStartDate(): String {
-        return SimpleDateFormat("EE, MMM d", Locale.US).format(start.time)
+    val end = MutableLiveData<Calendar>().apply {
+        value = Calendar.getInstance().apply {
+            add(Calendar.DAY_OF_MONTH, 7)
+        }
     }
 
-    @Bindable("end")
-    fun getEndDate(): String {
-        return SimpleDateFormat("EE, MMM d", Locale.US).format(end.time)
+    val startDate: LiveData<String> = Transformations.map(start) {
+        SimpleDateFormat("EE, MMM d", Locale.US).format(it.time)
+    }
+
+    val endDate: LiveData<String> = Transformations.map(end) {
+        SimpleDateFormat("EE, MMM d", Locale.US).format(it.time)
+    }
+
+    fun updateStartDate(calendar: Calendar) {
+        start.value = calendar
+
+        if (end.value?.before(calendar) == true) {
+            end.value = calendar.clone() as Calendar
+        }
+    }
+
+    fun updateEndDate(calendar: Calendar) {
+        end.value = calendar
     }
 
     fun pickStartDate() {
-        sendEvent(Event.StartDate(start))
+        sendEvent(Event.StartDate(start.value!!))
     }
 
     fun pickEndDate() {
-        sendEvent(Event.EndDate(end))
+        sendEvent(Event.EndDate(end.value!!, start.value!!.timeInMillis))
     }
 
     fun showMessage(message: String) {
@@ -73,8 +72,8 @@ class TravelCreateViewModel(
         val travel = Travel(
             title.value,
             description.value,
-            start.timeInMillis,
-            end.timeInMillis
+            start.value!!.timeInMillis,
+            end.value!!.timeInMillis
         )
 
         launch {

@@ -24,7 +24,7 @@ class TravelCreateFragment : BaseBoundVmFragment<FragmentTravelCreateBinding, Tr
         object Done : Event()
         data class Toast(val message: String) : Event()
         data class StartDate(val calendar: Calendar) : Event()
-        data class EndDate(val calendar: Calendar) : Event()
+        data class EndDate(val calendar: Calendar, val minDate: Long) : Event()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,7 +38,7 @@ class TravelCreateFragment : BaseBoundVmFragment<FragmentTravelCreateBinding, Tr
                 is Event.Done -> findNavController().popBackStack()
                 is Event.Toast -> toast(it.message)
                 is Event.StartDate -> showStartDatePicker(it.calendar)
-                is Event.EndDate -> showEndDatePicker(it.calendar)
+                is Event.EndDate -> showEndDatePicker(it.calendar, it.minDate)
             }
         }
     }
@@ -46,26 +46,22 @@ class TravelCreateFragment : BaseBoundVmFragment<FragmentTravelCreateBinding, Tr
     private fun showStartDatePicker(calendar: Calendar) {
         DatePickerDialog(
             requireContext(),
-            { _, year, month, day ->
-                vm.start = calendar.update(year, month, day)
-            },
+            { _, year, month, day -> vm.updateStartDate(calendar.update(year, month, day)) },
             calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH),
             calendar.get(Calendar.DAY_OF_MONTH)
         ).show()
     }
 
-    private fun showEndDatePicker(calendar: Calendar) {
+    private fun showEndDatePicker(calendar: Calendar, minDate: Long) {
         DatePickerDialog(
             requireContext(),
-            { _, year, month, day ->
-                vm.end = calendar.update(year, month, day)
-            },
+            { _, year, month, day -> vm.updateEndDate(calendar.update(year, month, day)) },
             calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH),
             calendar.get(Calendar.DAY_OF_MONTH)
         ).apply {
-            datePicker.minDate = vm.start.timeInMillis
+            datePicker.minDate = minDate
         }.show()
     }
 }
