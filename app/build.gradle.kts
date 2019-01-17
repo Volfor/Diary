@@ -35,7 +35,7 @@ android {
 
 dependencies {
     val appcompatVersion = "1.1.0-alpha01"
-    val kodeinVersion = "6.0.1"
+    val koinVersion = "2.0.0-alpha-6"
     val lifecycleVersion = "2.0.0"
     val navigationVersion = "1.0.0-alpha08"
     val bindingAdapterVersion = "1c7e24ea7a"
@@ -58,8 +58,8 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.0")
 
     // DI
-    implementation("org.kodein.di:kodein-di-generic-jvm:$kodeinVersion")
-    implementation("org.kodein.di:kodein-di-framework-android-x:$kodeinVersion")
+    implementation("org.koin:koin-android:$koinVersion")
+    implementation("org.koin:koin-androidx-viewmodel:$koinVersion")
 
     // Firebase
     implementation("com.google.firebase:firebase-core:16.0.6")

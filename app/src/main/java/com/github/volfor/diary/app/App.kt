@@ -7,25 +7,33 @@ import com.github.volfor.diary.di.appModule
 import com.github.volfor.diary.di.firebaseModule
 import com.github.volfor.diary.di.repositoriesModule
 import com.github.volfor.diary.di.viewModelsModule
-import org.kodein.di.Kodein
-import org.kodein.di.KodeinAware
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 
-class App : Application(), KodeinAware {
-    override val kodein = Kodein.lazy {
-        import(appModule)
-        import(viewModelsModule)
-        import(firebaseModule)
-        import(repositoriesModule)
-    }
+class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        insertKoin()
+
         /*  // TODO: enable when appcompat:1.1.0-alpha02 will came out
             if (LeakCanary.isInAnalyzerProcess(this)) return
             LeakCanary.install(this)
          */
 
         setupLogging()
+    }
+
+    private fun insertKoin() {
+        startKoin {
+            androidContext(this@App)
+            modules(
+                appModule,
+                viewModelsModule,
+                firebaseModule,
+                repositoriesModule
+            )
+        }
     }
 
     private fun setupLogging() {

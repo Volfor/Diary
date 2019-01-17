@@ -11,15 +11,11 @@ import com.github.volfor.diary.screens.travel.create.TravelCreateViewModel
 import com.github.volfor.diary.screens.travel.list.TravelListViewModel
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.Dispatchers
-import org.kodein.di.Kodein
-import org.kodein.di.direct
-import org.kodein.di.generic.bind
-import org.kodein.di.generic.instance
-import org.kodein.di.generic.provider
-import org.kodein.di.generic.singleton
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.dsl.module
 
-val appModule = Kodein.Module("App") {
-    bind<CoroutineContextHolder>() with singleton {
+val appModule = module {
+    single {
         CoroutineContextHolderImpl(
             main = Dispatchers.Main,
             io = Dispatchers.IO,
@@ -28,21 +24,19 @@ val appModule = Kodein.Module("App") {
     }
 }
 
-val viewModelsModule = Kodein.Module("View Models") {
-    bind<ViewModelsFactory>() with singleton { ViewModelsFactory(kodein.direct) }
-
-    bind<AppViewModel>() with provider { AppViewModel(instance()) }
-    bind<LoginViewModel>() with provider { LoginViewModel(instance(), instance()) }
-    bind<TravelListViewModel>() with provider { TravelListViewModel(instance(), instance()) }
-    bind<TravelCreateViewModel>() with provider { TravelCreateViewModel(instance(), instance()) }
-    bind<TravelViewModel>() with provider { TravelViewModel(instance(), instance()) }
+val viewModelsModule = module {
+    viewModel { AppViewModel(get()) }
+    viewModel { LoginViewModel(get(), get()) }
+    viewModel { TravelListViewModel(get(), get()) }
+    viewModel { TravelCreateViewModel(get(), get()) }
+    viewModel { TravelViewModel(get(), get()) }
 }
 
-val firebaseModule = Kodein.Module("Firebase") {
-    bind<FirebaseDatabase>() with singleton { FirebaseDatabase.getInstance() }
+val firebaseModule = module {
+    single { FirebaseDatabase.getInstance() }
 }
 
-val repositoriesModule = Kodein.Module("Repositories") {
-    bind<UserRepository>() with singleton { UserRepository(instance(), instance()) }
-    bind<TravelsRepository>() with singleton { TravelsRepository(instance(), instance()) }
+val repositoriesModule = module {
+    single { UserRepository(get(), get()) }
+    single { TravelsRepository(get(), get()) }
 }
