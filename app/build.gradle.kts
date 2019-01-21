@@ -36,11 +36,11 @@ android {
 dependencies {
     val appcompatVersion = "1.1.0-alpha01"
     val koinVersion = "2.0.0-alpha-6"
-    val lifecycleVersion = "2.0.0"
-    val navigationVersion = "1.0.0-alpha08"
+    val lifecycleVersion = "2.1.0-alpha01"
+    val navigationVersion = "1.0.0-alpha09"
     val bindingAdapterVersion = "1c7e24ea7a"
-    val firebaseUIVersion = "4.3.0"
-    val leakCanaryVersion = "1.6.2"
+    val firebaseUIVersion = "4.3.1"
+    val leakCanaryVersion = "1.6.3"
 
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
@@ -52,6 +52,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-extensions:$lifecycleVersion")
     implementation("android.arch.navigation:navigation-fragment-ktx:$navigationVersion")
     implementation("android.arch.navigation:navigation-ui-ktx:$navigationVersion")
+    implementation("androidx.core:core-ktx:1.1.0-alpha03")
 
     // Kotlin
     implementation(kotlin("stdlib", rootProject.extra["kotlinVersion"] as String))
