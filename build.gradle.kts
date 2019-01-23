@@ -1,5 +1,5 @@
 buildscript {
-    val kotlinVersion by rootProject.extra { "1.3.11" }
+    val kotlinVersion by rootProject.extra { "1.3.20" }
 
     repositories {
         google()
