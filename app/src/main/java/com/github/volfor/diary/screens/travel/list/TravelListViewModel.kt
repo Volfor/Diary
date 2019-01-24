@@ -23,7 +23,7 @@ class TravelListViewModel(
 
     val itemsBinding = OnItemBindClass<Any>().apply {
         map<String>(BR.item, R.layout.item_header)
-        map<TravelItem> { itemBinding, position, item ->
+        map<TravelItem> { itemBinding, _, _ ->
             itemBinding.set(BR.item, R.layout.item_travel)
                 .bindExtra(BR.listener, this@TravelListViewModel)
         }

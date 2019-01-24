@@ -1,7 +1,6 @@
 package com.github.volfor.diary.extensions
 
 import android.app.Activity
-import android.app.DatePickerDialog
 import android.content.Intent
 import android.widget.Toast
 import androidx.databinding.ObservableArrayList
@@ -9,7 +8,7 @@ import androidx.databinding.ObservableList
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import java.util.Calendar
+import java.util.*
 import kotlin.reflect.KClass
 
 fun Activity.startActivity(cls: KClass<*>) {
@@ -38,7 +37,7 @@ fun Fragment.toast(message: String) {
     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }
 
-inline fun <T> observableListOf(): ObservableList<T> = ObservableArrayList()
+inline fun <reified T> observableListOf(): ObservableList<T> = ObservableArrayList<T>()
 
 fun Calendar.update(year: Int, month: Int, day: Int): Calendar {
     set(Calendar.YEAR, year)
