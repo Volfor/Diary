@@ -1,9 +1,9 @@
 plugins {
     id("com.android.application")
-    id("androidx.navigation.safeargs")
     id("kotlin-android")
     id("kotlin-android-extensions")
     id("kotlin-kapt")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -37,7 +37,7 @@ dependencies {
     val appcompatVersion = "1.1.0-alpha01"
     val koinVersion = "2.0.0-alpha-6"
     val lifecycleVersion = "2.1.0-alpha01"
-    val navigationVersion = "1.0.0-alpha09"
+    val navigationVersion = "1.0.0-alpha11"
     val bindingAdapterVersion = "1c7e24ea7a"
     val firebaseUIVersion = "4.3.1"
     val leakCanaryVersion = "1.6.3"
