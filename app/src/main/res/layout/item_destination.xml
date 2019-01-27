@@ -1,0 +1,118 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.github.volfor.diary.screens.travel.create.DestinationItem"
+            />
+
+        <variable
+            name="listener"
+            type="com.github.volfor.diary.screens.travel.create.DestinationItem.Listener"
+            />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:background="#FF424242"
+        >
+
+        <ImageView
+            android:id="@+id/btnRemove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="@{() -> listener.remove(item)}"
+            android:padding="4dp"
+            android:src="@drawable/ic_close"
+            android:visibility="@{item.removeEnabled}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            />
+
+        <ImageView
+            android:id="@+id/imgLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/ic_location"
+            app:layout_constraintBottom_toBottomOf="@+id/fLocation"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/fLocation"
+            />
+
+        <EditText
+            android:id="@+id/fLocation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:hint="Where do you want to go?"
+            android:text="@={item.location}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imgLocation"
+            app:layout_constraintTop_toBottomOf="@+id/btnRemove"
+            app:layout_goneMarginTop="16dp"
+            />
+
+        <ImageView
+            android:id="@+id/imgDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/ic_event"
+            app:layout_constraintBottom_toBottomOf="@+id/fStart"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/fStart"
+            />
+
+        <EditText
+            android:id="@+id/fStart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            android:editable="false"
+            android:focusable="false"
+            android:hint="@{item.startDate}"
+            android:onClick="@{() -> listener.pickStart(item)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/fEnd"
+            app:layout_constraintStart_toEndOf="@+id/imgDate"
+            app:layout_constraintTop_toBottomOf="@+id/fLocation"
+            tools:hint="Wed, Jan 2"
+            />
+
+        <EditText
+            android:id="@+id/fEnd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:clickable="true"
+            android:editable="false"
+            android:focusable="false"
+            android:hint="@{item.endDate}"
+            android:onClick="@{() -> listener.pickEnd(item)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/fStart"
+            app:layout_constraintTop_toTopOf="@+id/fStart"
+            tools:hint="Wed, Jan 9"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

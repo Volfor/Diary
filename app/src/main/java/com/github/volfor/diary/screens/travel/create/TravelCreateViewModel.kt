@@ -1,87 +1,80 @@
 package com.github.volfor.diary.screens.travel.create
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
+import com.github.volfor.diary.BR
 import com.github.volfor.diary.CoroutineContextHolder
+import com.github.volfor.diary.R
 import com.github.volfor.diary.base.BaseEventViewModel
-import com.github.volfor.diary.models.Travel
 import com.github.volfor.diary.repositories.TravelsRepository
 import com.github.volfor.diary.screens.travel.create.TravelCreateFragment.Event
-import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
+import me.tatarka.bindingcollectionadapter2.ItemBinding
 import java.util.*
 
 
 class TravelCreateViewModel(
     ctx: CoroutineContextHolder,
     private val travelsRepository: TravelsRepository
-) : BaseEventViewModel<TravelCreateFragment.Event>(ctx) {
+) : BaseEventViewModel<TravelCreateFragment.Event>(ctx), DestinationItem.Listener {
+
+    val items = MutableLiveData<List<DestinationItem>>().apply {
+        value = mutableListOf(DestinationItem(Calendar.getInstance(), false))
+    }
+
+    var itemBinding = ItemBinding.of<DestinationItem>(BR.item, R.layout.item_destination)
+        .bindExtra(BR.listener, this@TravelCreateViewModel)
 
     val title = MutableLiveData<String>()
     val description = MutableLiveData<String>()
 
-    val start = MutableLiveData<Calendar>().apply {
-        value = Calendar.getInstance()
+    override fun pickStart(item: DestinationItem) {
+        sendEvent(Event.StartDate(item))
     }
 
-    val end = MutableLiveData<Calendar>().apply {
-        value = Calendar.getInstance().apply {
-            add(Calendar.DAY_OF_MONTH, 7)
-        }
+    override fun pickEnd(item: DestinationItem) {
+        sendEvent(Event.EndDate(item))
     }
 
-    val startDate: LiveData<String> = Transformations.map(start) {
-        SimpleDateFormat("EE, MMM d", Locale.US).format(it.time)
+    override fun remove(item: DestinationItem) {
+        val result = items.value!!.toMutableList()
+        result.remove(item)
+
+        result.first().removeEnabled.value = result.size > 1
+
+        items.value = result
     }
 
-    val endDate: LiveData<String> = Transformations.map(end) {
-        SimpleDateFormat("EE, MMM d", Locale.US).format(it.time)
-    }
+    fun add() {
+        val result = items.value!!.toMutableList()
+        result.add(DestinationItem(result.last().end.value!!))
 
-    fun updateStartDate(calendar: Calendar) {
-        start.value = calendar
+        result.first().removeEnabled.value = result.size > 1
 
-        if (end.value?.before(calendar) == true) {
-            end.value = calendar.clone() as Calendar
-        }
-    }
-
-    fun updateEndDate(calendar: Calendar) {
-        end.value = calendar
-    }
-
-    fun pickStartDate() {
-        sendEvent(Event.StartDate(start.value!!))
-    }
-
-    fun pickEndDate() {
-        sendEvent(Event.EndDate(end.value!!, start.value!!.timeInMillis))
+        items.value = result
     }
 
     fun showMessage(message: String) {
         sendEvent(Event.Toast(message))
     }
 
-    fun done() {
-        if (title.value.isNullOrEmpty()) {
-            showMessage("Title is required")
-            return
-        }
-
-        val travel = Travel(
-            title.value,
-            description.value,
-            start.value!!.timeInMillis,
-            end.value!!.timeInMillis
-        )
-
-        launch {
-            if (travelsRepository.save(travel)) {
-                sendEvent(Event.Done)
-            } else {
-                showMessage("Error")
-            }
-        }
-    }
+//    fun done() {
+//        if (title.value.isNullOrEmpty()) {
+//            showMessage("Title is required")
+//            return
+//        }
+//
+//        val travel = Travel(
+//            title.value,
+//            description.value,
+//            start.value!!.timeInMillis,
+//            end.value!!.timeInMillis
+//        )
+//
+//        launch {
+//            if (travelsRepository.save(travel)) {
+//                sendEvent(Event.Done)
+//            } else {
+//                showMessage("Error")
+//            }
+//        }
+//    }
 }

@@ -23,8 +23,8 @@ class TravelCreateFragment : BaseBoundVmFragment<FragmentTravelCreateBinding, Tr
     sealed class Event : ViewAction {
         object Done : Event()
         data class Toast(val message: String) : Event()
-        data class StartDate(val calendar: Calendar) : Event()
-        data class EndDate(val calendar: Calendar, val minDate: Long) : Event()
+        data class StartDate(val item: DestinationItem) : Event()
+        data class EndDate(val item: DestinationItem) : Event()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,26 +37,31 @@ class TravelCreateFragment : BaseBoundVmFragment<FragmentTravelCreateBinding, Tr
             when (it) {
                 is Event.Done -> findNavController().popBackStack()
                 is Event.Toast -> toast(it.message)
-                is Event.StartDate -> showStartDatePicker(it.calendar)
-                is Event.EndDate -> showEndDatePicker(it.calendar, it.minDate)
+                is Event.StartDate -> showStartDatePicker(it.item)
+                is Event.EndDate -> showEndDatePicker(it.item)
             }
         }
     }
 
-    private fun showStartDatePicker(calendar: Calendar) {
+    private fun showStartDatePicker(item: DestinationItem) {
+        val calendar = item.start.value!!
+
         DatePickerDialog(
             requireContext(),
-            { _, year, month, day -> vm.updateStartDate(calendar.update(year, month, day)) },
+            { _, year, month, day -> item.updateStartDate(calendar.update(year, month, day)) },
             calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH),
             calendar.get(Calendar.DAY_OF_MONTH)
         ).show()
     }
 
-    private fun showEndDatePicker(calendar: Calendar, minDate: Long) {
+    private fun showEndDatePicker(item: DestinationItem) {
+        val calendar = item.end.value!!
+        val minDate = item.start.value!!.timeInMillis
+
         DatePickerDialog(
             requireContext(),
-            { _, year, month, day -> vm.updateEndDate(calendar.update(year, month, day)) },
+            { _, year, month, day -> item.updateEndDate(calendar.update(year, month, day)) },
             calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH),
             calendar.get(Calendar.DAY_OF_MONTH)
