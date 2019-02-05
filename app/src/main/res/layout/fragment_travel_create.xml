@@ -17,11 +17,10 @@
         android:orientation="vertical"
         >
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
+        <include
+            android:id="@+id/toolbarCreateTravel"
+            layout="@layout/toolbar"
+            app:toolbarData="@{vm.toolbarData}"
             />
 
         <androidx.core.widget.NestedScrollView
@@ -39,15 +38,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
                     android:layout_marginEnd="16dp"
                     android:hint="Title"
                     android:text="@={vm.title}"
-                    app:layout_constraintBottom_toTopOf="@+id/fDescription"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.1"
-                    app:layout_constraintVertical_chainStyle="packed"
                     />
 
                 <EditText
@@ -59,24 +56,34 @@
                     android:layout_marginEnd="16dp"
                     android:hint="Description"
                     android:text="@={vm.description}"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/fTitle"
+                    />
+
+                <TextView
+                    android:id="@+id/txtDestinations"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Destinations"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/fDescription"
                     />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerDestinations"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="8dp"
                     android:nestedScrollingEnabled="false"
                     app:itemBinding="@{vm.itemBinding}"
-                    app:items="@{vm.items}"
+                    app:items="@{vm.destinations}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/fDescription"
+                    app:layout_constraintTop_toBottomOf="@+id/txtDestinations"
                     tools:layout_height="340dp"
                     tools:layout_width="match_parent"
                     tools:listitem="@layout/item_destination"
@@ -98,17 +105,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/recyclerDestinations"
                     />
-
-                <!--<Button-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginTop="36dp"-->
-                <!--android:onClick="@{() -> vm.done()}"-->
-                <!--android:text="Done"-->
-                <!--app:layout_constraintBottom_toBottomOf="parent"-->
-                <!--app:layout_constraintEnd_toEndOf="parent"-->
-                <!--app:layout_constraintStart_toStartOf="parent"-->
-                <!--/>-->
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>

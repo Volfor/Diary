@@ -3,6 +3,7 @@ package com.github.volfor.diary.screens.travel.create
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.widget.Toolbar
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.github.volfor.diary.R
@@ -29,7 +30,7 @@ class TravelCreateFragment : BaseBoundVmFragment<FragmentTravelCreateBinding, Tr
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        toolbar.setupWithNavController(findNavController())
+        (toolbarCreateTravel as Toolbar).setupWithNavController(findNavController())
     }
 
     override fun initObservers() {
