@@ -34,12 +34,11 @@ android {
 }
 
 dependencies {
-    val appcompatVersion = "1.1.0-alpha01"
-    val koinVersion = "2.0.0-alpha-6"
-    val lifecycleVersion = "2.1.0-alpha01"
-    val navigationVersion = "1.0.0-alpha11"
-    val bindingAdapterVersion = "1c7e24ea7a"
-    val firebaseUIVersion = "4.3.1"
+    val appcompatVersion = "1.1.0-alpha03"
+    val koinVersion = "2.0.0-beta-1"
+    val lifecycleVersion = "2.1.0-alpha03"
+    val bindingAdapterVersion = "3.0.0"
+    val firebaseUIVersion = "4.3.2"
     val leakCanaryVersion = "1.6.3"
 
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
@@ -50,8 +49,8 @@ dependencies {
 
     // Architecture components
     implementation("androidx.lifecycle:lifecycle-extensions:$lifecycleVersion")
-    implementation("android.arch.navigation:navigation-fragment-ktx:$navigationVersion")
-    implementation("android.arch.navigation:navigation-ui-ktx:$navigationVersion")
+    implementation("androidx.navigation:navigation-fragment-ktx:${rootProject.extra["navigationVersion"]}")
+    implementation("androidx.navigation:navigation-ui-ktx:${rootProject.extra["navigationVersion"]}")
     implementation("androidx.core:core-ktx:1.1.0-alpha03")
 
     // Kotlin
@@ -69,9 +68,9 @@ dependencies {
     implementation("com.firebaseui:firebase-ui-database:$firebaseUIVersion")
 
     // Data Binding
-    implementation("com.github.Volfor.binding-collection-adapter:bindingcollectionadapter:$bindingAdapterVersion")
-    implementation("com.github.Volfor.binding-collection-adapter:bindingcollectionadapter-recyclerview:$bindingAdapterVersion")
-    implementation("com.github.Volfor.binding-collection-adapter:bindingcollectionadapter-ktx:$bindingAdapterVersion")
+    implementation("me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:$bindingAdapterVersion")
+    implementation("me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:$bindingAdapterVersion")
+    implementation("me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-ktx:$bindingAdapterVersion")
 
     // Leak canary
     debugImplementation("com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion")

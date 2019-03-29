@@ -1,14 +1,16 @@
 buildscript {
-    val kotlinVersion by rootProject.extra { "1.3.20" }
+    val kotlinVersion by rootProject.extra { "1.3.21" }
+    val navigationVersion by rootProject.extra { "2.1.0-alpha01" }
 
     repositories {
         google()
         jcenter()
     }
+
     dependencies {
-        classpath("com.android.tools.build:gradle:3.5.0-alpha03")
+        classpath("com.android.tools.build:gradle:3.5.0-alpha09")
         classpath(kotlin("gradle-plugin", kotlinVersion))
-        classpath("android.arch.navigation:navigation-safe-args-gradle-plugin:1.0.0-alpha11")
+        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion")
         classpath("com.google.gms:google-services:4.2.0")
     }
 }
