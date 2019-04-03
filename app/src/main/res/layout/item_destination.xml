@@ -32,6 +32,7 @@
             android:layout_marginEnd="12dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
+            android:contentDescription="@string/remove"
             android:focusable="true"
             android:onClick="@{() -> listener.remove(item)}"
             android:padding="4dp"
@@ -39,7 +40,6 @@
             android:visibility="@{item.removeEnabled}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-
             />
 
         <ImageView
@@ -47,6 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:contentDescription="@string/location"
             android:src="@drawable/ic_location"
             app:layout_constraintBottom_toBottomOf="@+id/fLocation"
             app:layout_constraintStart_toStartOf="parent"
@@ -58,13 +59,17 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:hint="Where do you want to go?"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:hint="@string/destination_location_hint"
+            android:importantForAutofill="no"
+            android:inputType="text"
             android:text="@={item.location}"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnRemove"
             app:layout_constraintStart_toEndOf="@+id/imgLocation"
-            app:layout_constraintTop_toBottomOf="@+id/btnRemove"
-            app:layout_goneMarginTop="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_goneMarginEnd="16dp"
+            tools:targetApi="o"
             />
 
         <ImageView
@@ -72,14 +77,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:contentDescription="@string/date"
             android:src="@drawable/ic_event"
             app:layout_constraintBottom_toBottomOf="@+id/fStart"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/fStart"
             />
 
-        <EditText
+        <TextView
             android:id="@+id/fStart"
+            style="@style/Widget.AppCompat.EditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -87,8 +94,8 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:clickable="true"
-            android:editable="false"
-            android:focusable="false"
+            android:focusable="true"
+            android:focusableInTouchMode="false"
             android:hint="@{item.startDate}"
             android:onClick="@{() -> listener.pickStart(item)}"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -98,17 +105,17 @@
             tools:hint="Wed, Jan 2"
             />
 
-        <EditText
+        <TextView
             android:id="@+id/fEnd"
+            style="@style/Widget.AppCompat.EditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
             android:clickable="true"
-            android:editable="false"
-            android:focusable="false"
+            android:focusable="true"
+            android:focusableInTouchMode="false"
             android:hint="@{item.endDate}"
             android:onClick="@{() -> listener.pickEnd(item)}"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/fLocation"
             app:layout_constraintStart_toEndOf="@+id/fStart"
             app:layout_constraintTop_toTopOf="@+id/fStart"
             tools:hint="Wed, Jan 9"

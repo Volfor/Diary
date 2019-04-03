@@ -4,8 +4,14 @@
     <string name="app_full_name">Traveler\'s Diary</string>
     <string name="app_slogan">Don\'t let your memories fade</string>
 
+    <string name="location">Location</string>
+    <string name="date">Date</string>
+    <string name="remove">Remove</string>
+
     <string name="login">Login</string>
     <string name="travels">Travels</string>
     <string name="create_travel">Create Travel</string>
+
+    <string name="destination_location_hint">Where do you want to go?</string>
 
 </resources>
