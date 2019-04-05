@@ -15,7 +15,6 @@ import kotlinx.coroutines.launch
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 import java.util.*
 
-
 class TravelCreateViewModel(
     ctx: CoroutineContextHolder,
     private val travelsRepository: TravelsRepository
@@ -99,5 +98,4 @@ class TravelCreateViewModel(
             }
         }
     }
-
 }

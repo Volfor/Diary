@@ -14,7 +14,6 @@ class UserRepository(
     database: FirebaseDatabase,
     ctx: CoroutineContextHolder
 ) : BaseRepository(), CoroutineContextHolder by ctx {
-
     override val ref by lazy { database.getReference(Firebase.User.REF) }
 
     suspend fun create(firebaseUser: FirebaseUser): Boolean = withContext(io) {

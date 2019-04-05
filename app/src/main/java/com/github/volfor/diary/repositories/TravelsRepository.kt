@@ -15,7 +15,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.withContext
 
-
 class TravelsRepository(
     database: FirebaseDatabase,
     ctx: CoroutineContextHolder

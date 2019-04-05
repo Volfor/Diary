@@ -16,7 +16,6 @@ import com.github.volfor.diary.livedata.observeEvent
 import kotlinx.android.synthetic.main.fragment_travel_create.*
 import java.util.*
 
-
 class TravelCreateFragment : BaseBoundVmFragment<FragmentTravelCreateBinding, TravelCreateViewModel>(
     R.layout.fragment_travel_create,
     TravelCreateViewModel::class

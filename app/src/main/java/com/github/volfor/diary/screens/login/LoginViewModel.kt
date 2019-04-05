@@ -9,6 +9,7 @@ import com.github.ajalt.timberkt.d
 import com.github.volfor.diary.CoroutineContextHolder
 import com.github.volfor.diary.base.BaseEventViewModel
 import com.github.volfor.diary.repositories.UserRepository
+import com.github.volfor.diary.screens.login.LoginFragment.Companion.RC_AUTH
 import com.github.volfor.diary.screens.login.LoginFragment.Event
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser

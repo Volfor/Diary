@@ -12,7 +12,6 @@ import com.github.volfor.diary.BR
 import org.koin.androidx.viewmodel.ext.getViewModel
 import kotlin.reflect.KClass
 
-
 abstract class BaseFragment(
     protected val layoutId: Int
 ) : Fragment() {
@@ -36,7 +35,7 @@ abstract class BaseBoundFragment<out TBinding : ViewDataBinding>(layoutId: Int) 
 
     override fun createView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         innerBinding = DataBindingUtil.inflate(inflater, layoutId, container, false)!!
-        innerBinding.setLifecycleOwner(this)
+        innerBinding.lifecycleOwner = this
         return innerBinding.root
     }
 }

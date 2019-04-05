@@ -10,7 +10,6 @@ import org.koin.androidx.viewmodel.ext.viewModel
 class AppActivity : AppCompatActivity() {
 
     private val navController by lazy { findNavController(R.id.navHostFragment) }
-
     private val vm: AppViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {

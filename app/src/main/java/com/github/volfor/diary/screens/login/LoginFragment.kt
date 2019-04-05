@@ -11,8 +11,6 @@ import com.github.volfor.diary.livedata.ViewAction
 import com.github.volfor.diary.livedata.observeEvent
 import com.github.volfor.diary.screens.login.LoginFragmentDirections as Directions
 
-const val RC_AUTH = 1324
-
 class LoginFragment : BaseBoundVmFragment<FragmentLoginBinding, LoginViewModel>(
     R.layout.fragment_login,
     LoginViewModel::class
@@ -46,5 +44,9 @@ class LoginFragment : BaseBoundVmFragment<FragmentLoginBinding, LoginViewModel>(
                 .setAvailableProviders(providers)
                 .build(), RC_AUTH
         )
+    }
+
+    companion object {
+        const val RC_AUTH = 1324
     }
 }

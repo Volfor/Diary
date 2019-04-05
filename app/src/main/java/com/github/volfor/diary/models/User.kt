@@ -10,7 +10,6 @@ data class User(
     var name: String? = "",
     var email: String? = ""
 ) {
-
     companion object {
         fun map(firebaseUser: FirebaseUser): User = User(
             firebaseUser.uid,

@@ -13,7 +13,6 @@ import me.tatarka.bindingcollectionadapter2.itembindings.OnItemBindClass
 import me.tatarka.bindingcollectionadapter2.map
 import java.util.*
 
-
 class TravelListViewModel(
     ctx: CoroutineContextHolder,
     private val travelsRepository: TravelsRepository

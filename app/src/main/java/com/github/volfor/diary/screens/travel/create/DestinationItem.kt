@@ -10,7 +10,6 @@ data class DestinationItem(
     private val startValue: Calendar,
     private val canDelete: Boolean = true
 ) {
-
     interface Listener {
         fun pickStart(item: DestinationItem)
 
@@ -54,5 +53,4 @@ data class DestinationItem(
     fun updateEndDate(calendar: Calendar) {
         end.value = calendar
     }
-
 }

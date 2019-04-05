@@ -8,7 +8,6 @@ import com.github.volfor.diary.livedata.ViewAction
 import com.github.volfor.diary.livedata.observeEvent
 import com.github.volfor.diary.screens.travel.list.TravelListFragmentDirections as Directions
 
-
 class TravelListFragment : BaseBoundVmFragment<FragmentTravelListBinding, TravelListViewModel>(
     R.layout.fragment_travel_list,
     TravelListViewModel::class
